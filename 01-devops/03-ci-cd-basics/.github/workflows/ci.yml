@@ -1,0 +1,155 @@
+# CI/CD Workflow Exercise
+#
+# Complete this GitHub Actions workflow to create a complete CI/CD pipeline.
+#
+# The workflow should:
+# 1. Run on push to main and on pull requests
+# 2. Set up Node.js environment
+# 3. Cache dependencies
+# 4. Install dependencies
+# 5. Lint code
+# 6. Run tests
+# 7. Build the application
+#
+# Follow the TODOs below to complete the workflow.
+
+# TODO: Name this workflow "CI" or "Continuous Integration"
+name:
+
+# TODO: Configure triggers (on)
+# Should run on:
+# - push to 'main' branch
+# - pull_request targeting 'main' branch
+# Hint: Use push: branches: [main] and pull_request: branches: [main]
+on:
+
+
+# TODO: Define jobs
+jobs:
+  # Job 1: Test and Lint
+  # TODO: Name this job "test"
+
+    # TODO: Specify the runner (use ubuntu-latest)
+    runs-on:
+
+    steps:
+      # Step 1: Checkout code
+      # TODO: Use the actions/checkout@v3 action
+      # Hint: - name: Checkout code
+      #         uses: actions/checkout@v3
+      -
+
+      # Step 2: Setup Node.js
+      # TODO: Use actions/setup-node@v3
+      # Set node-version to 18
+      # Hint: with:
+      #         node-version: 18
+      -
+
+      # Step 3: Cache dependencies
+      # TODO: Use actions/cache@v3 to cache npm dependencies
+      # path: ~/.npm
+      # key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      # restore-keys: ${{ runner.os }}-node-
+      - name: Cache dependencies
+
+
+      # Step 4: Install dependencies
+      # TODO: Run "npm ci" to install dependencies
+      # Hint: - name: Install dependencies
+      #         run: npm ci
+      - name: Install dependencies
+
+
+      # Step 5: Run linter
+      # TODO: Run "npm run lint"
+      - name: Lint code
+
+
+      # Step 6: Run tests
+      # TODO: Run "npm test"
+      - name: Run tests
+
+
+      # Step 7: Upload test coverage (optional)
+      # TODO: If tests generate coverage, upload it
+      # Use actions/upload-artifact@v3
+      # Uncomment and complete:
+      # - name: Upload coverage
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: coverage
+      #     path: coverage/
+
+  # Job 2: Build
+  # This job builds the application
+  # It should run in parallel with the test job
+  # TODO: Name this job "build"
+
+    # TODO: Specify the runner
+    runs-on:
+
+    steps:
+      # TODO: Checkout code
+      -
+
+      # TODO: Setup Node.js
+      -
+
+      # TODO: Cache dependencies (same as test job)
+      -
+
+      # TODO: Install dependencies
+      - name: Install dependencies
+
+
+      # TODO: Build the application
+      # Run "npm run build"
+      - name: Build application
+
+
+      # TODO: Upload build artifacts
+      # Use actions/upload-artifact@v3
+      # Upload the "dist" folder
+      # Hint: - name: Upload build artifacts
+      #         uses: actions/upload-artifact@v3
+      #         with:
+      #           name: build
+      #           path: dist/
+      -
+
+  # Job 3: Deploy (Optional Advanced Exercise)
+  # This job should only run after test and build succeed
+  # It should only run on pushes to main (not PRs)
+  #
+  # Uncomment and complete this section:
+  #
+  # deploy:
+  #   # TODO: This job needs test and build to complete first
+  #   needs: [test, build]
+  #
+  #   # TODO: Only run on push to main, not on pull_request
+  #   # Hint: if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  #   if:
+  #
+  #   runs-on: ubuntu-latest
+  #
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #
+  #     # TODO: Download build artifacts from build job
+  #     # Use actions/download-artifact@v3
+  #     # - name: Download build
+  #     #   uses: actions/download-artifact@v3
+  #     #   with:
+  #     #     name: build
+  #     #     path: dist/
+  #
+  #     - name: Deploy to production
+  #       run: |
+  #         echo "Deploying to production..."
+  #         echo "This is where you'd deploy to your server"
+  #         # Example: scp -r dist/ user@server:/var/www/app
+  #         # Or: aws s3 sync dist/ s3://my-bucket
+  #         # Or: docker build and push

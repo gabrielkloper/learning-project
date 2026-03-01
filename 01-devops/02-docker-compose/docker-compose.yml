@@ -1,0 +1,105 @@
+# Docker Compose Exercise
+#
+# Complete this docker-compose.yml file to orchestrate a multi-container application.
+#
+# The application consists of:
+# - Web service: Node.js Express server (port 3000)
+# - Database service: PostgreSQL (port 5432)
+#
+# Follow the TODOs below to complete the configuration.
+
+# TODO: Specify the Compose file version (use '3.9')
+version: ''
+
+services:
+  # Web Service (Node.js Express App)
+  web:
+    # TODO: Build from the ./web directory
+    build:
+
+    # TODO: Name the container "express-web"
+    container_name:
+
+    # TODO: Map port 3000 on host to port 3000 in container
+    ports:
+      -
+
+    # TODO: Set environment variables:
+    # - NODE_ENV=development
+    # - DB_HOST=db
+    # - DB_PORT=5432
+    # - DB_NAME=myapp
+    # - DB_USER=postgres
+    # - DB_PASSWORD=mysecretpassword
+    environment:
+      -
+      -
+      -
+      -
+      -
+      -
+
+    # TODO: Make web service depend on db service
+    # Hint: depends_on: - servicename
+    depends_on:
+      -
+
+    # TODO: Connect to app-network
+    networks:
+      -
+
+    # TODO: Set restart policy to "unless-stopped"
+    restart:
+
+  # Database Service (PostgreSQL)
+  db:
+    # TODO: Use postgres:15-alpine image
+    image:
+
+    # TODO: Name the container "postgres-db"
+    container_name:
+
+    # TODO: Set environment variables:
+    # - POSTGRES_DB=myapp
+    # - POSTGRES_USER=postgres
+    # - POSTGRES_PASSWORD=mysecretpassword
+    environment:
+      -
+      -
+      -
+
+    # TODO: Map port 5432 on host to port 5432 in container
+    ports:
+      -
+
+    # TODO: Mount volumes:
+    # - Named volume postgres-data to /var/lib/postgresql/data
+    # - Bind mount ./db/init.sql to /docker-entrypoint-initdb.d/init.sql (read-only)
+    volumes:
+      -
+      -
+
+    # TODO: Connect to app-network
+    networks:
+      -
+
+    # TODO: Add health check
+    # test: ["CMD-SHELL", "pg_isready -U postgres"]
+    # interval: 10s
+    # timeout: 5s
+    # retries: 5
+    healthcheck:
+      test:
+      interval:
+      timeout:
+      retries:
+
+# TODO: Define named volumes
+# Create a volume named "postgres-data"
+volumes:
+
+
+# TODO: Define networks
+# Create a network named "app-network"
+networks:
+
